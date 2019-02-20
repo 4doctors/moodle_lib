@@ -14,9 +14,50 @@ defmodule MoodleLib.Client do
   # users[0][customfields][1][type]=NIF&
   # users[0][customfields][1][value]=123456789Z
   def build_user(user_params) do
+    user_params
+    |> group_customfields()
+    |> (&struct(User, &1)).()
+  end
+
+  def create_user(user_params) do
+    IO.inspect(
       user_params
-      |> group_customfields()
-      |> (&struct(User, &1)).()
+      |> build_user()
+      |> prepare_user()
+      |> to_querystring()
+    )
+
+    # |> build_uri()
+  end
+
+  defp prepare_user(user) do
+    user
+    |> Map.from_struct()
+    |> Enum.filter(fn {_, v} -> v != nil end)
+    |> Enum.into(%{})
+  end
+
+  defp to_querystring(user) do
+    user
+    |> flatten_custom_fields()
+    |> Enum.reduce(%{}, fn {k, v}, acc ->
+      Map.put(acc, "users[0][#{k}]", v)
+    end)
+  end
+
+  defp flatten_custom_fields(params) do
+    params.customfields
+    |> Enum.with_index()
+    |> Enum.reduce(%{}, fn {{k,v}, idx}, acc ->
+      acc = Map.put(acc, "customfields][#{idx}][type", "#{k}")
+      Map.put(acc, "customfields][#{idx}][value", v)
+    end)
+    |> Map.merge(params)
+    |> Map.delete(:customfields)
+  end
+
+  def prepare_customfields(user) do
+    user.customfields
   end
 
   defp group_customfields(params) do
@@ -30,7 +71,7 @@ defmodule MoodleLib.Client do
         Map.put(acc, el, params[el])
       end)
 
-      Map.put(params, :customfields, customfields)
+    Map.put(params, :customfields, customfields)
   end
 
   defp url do

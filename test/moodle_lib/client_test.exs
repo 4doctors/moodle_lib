@@ -28,14 +28,19 @@ defmodule MoodleLib.ClientTest do
     assert new_user.customfields.something == params.something
   end
 
-  @tag :skip
   test "it can create a new user" do
     params = %{
+      username: "j.doe",
       firstname: "John",
       lastname: "Doe",
-      email: "j.doe@example.com"
+      email: "j.doe@example.com",
+      one: "extra",
+      something: "else"
     }
 
     {:ok, new_user} = Client.create_user(params)
+
+    assert new_user.id =~ ~r/^\d+$/
+    assert new_user.username == "j.doe"
   end
 end

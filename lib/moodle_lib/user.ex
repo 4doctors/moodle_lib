@@ -1,5 +1,6 @@
 defmodule MoodleLib.User do
-  defstruct firstname: nil,
+  defstruct username: nil,
+            firstname: nil,
             lastname: nil,
             password: nil,
             createpassword: nil,
