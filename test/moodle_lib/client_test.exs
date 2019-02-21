@@ -3,6 +3,15 @@ defmodule MoodleLib.ClientTest do
 
   alias MoodleLib.{Client, User}
 
+  @default_params %{
+    username: "j.doe",
+    firstname: "John",
+    lastname: "Doe",
+    email: "j.doe@example.com",
+    one: "extra",
+    something: "else"
+  }
+
   test "it builds up a user struct" do
     params = %{
       firstname: "John",
@@ -29,16 +38,7 @@ defmodule MoodleLib.ClientTest do
   end
 
   test "it can create a new user" do
-    params = %{
-      username: "j.doe",
-      firstname: "John",
-      lastname: "Doe",
-      email: "j.doe@example.com",
-      one: "extra",
-      something: "else"
-    }
-
-    {:ok, new_user} = Client.create_user(params)
+    {:ok, new_user} = Client.create_user(@default_params)
 
     on_exit(fn -> Client.delete_user(new_user.id) end)
 
@@ -47,37 +47,19 @@ defmodule MoodleLib.ClientTest do
   end
 
   test "it can delete a user" do
-    params = %{
-      username: "j.doe",
-      firstname: "John",
-      lastname: "Doe",
-      email: "j.doe@example.com",
-      one: "extra",
-      something: "else"
-    }
-
-    {:ok, new_user} = Client.create_user(params)
+    {:ok, new_user} = Client.create_user(@default_params)
 
     assert {:ok, _message} = Client.delete_user(new_user.id)
   end
 
   test "it can retriecve user details" do
-    params = %{
-      username: "j.doe",
-      firstname: "John",
-      lastname: "Doe",
-      email: "j.doe@example.com",
-      one: "extra",
-      something: "else"
-    }
-
-    {:ok, new_user} = Client.create_user(params)
+    {:ok, new_user} = Client.create_user(@default_params)
     {:ok, user_details} = Client.get_user(new_user.id)
 
     on_exit(fn -> Client.delete_user(new_user.id) end)
 
-    assert user_details.email == params.email
-    assert user_details.firstname == params.firstname
-    assert user_details.lastname == params.lastname
+    assert user_details.email == @default_params.email
+    assert user_details.firstname == @default_params.firstname
+    assert user_details.lastname == @default_params.lastname
   end
 end

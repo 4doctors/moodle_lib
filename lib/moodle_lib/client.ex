@@ -109,8 +109,9 @@ defmodule MoodleLib.Client do
     params.customfields
     |> Enum.with_index()
     |> Enum.reduce(%{}, fn {{k, v}, idx}, acc ->
-      acc = Map.put(acc, "customfields][#{idx}][type", "#{k}")
-      Map.put(acc, "customfields][#{idx}][value", v)
+      acc
+      |> Map.put("customfields][#{idx}][type", k)
+      |> Map.put("customfields][#{idx}][value", v)
     end)
     |> Map.merge(params)
     |> Map.delete(:customfields)
