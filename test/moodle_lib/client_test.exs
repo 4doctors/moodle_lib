@@ -40,7 +40,7 @@ defmodule MoodleLib.ClientTest do
 
     {:ok, new_user} = Client.create_user(params)
 
-    assert new_user.id =~ ~r/^\d+$/
+    assert new_user.id |> to_string() =~ ~r/^\d+$/
     assert new_user.username == "j.doe"
   end
 end

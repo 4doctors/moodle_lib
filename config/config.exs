@@ -28,3 +28,11 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env()}.exs"
+
+if Mix.env() != :prod do
+  config :moodle_lib,
+    base_url: "http://localhost:8080/webservice/rest/server.php",
+    token: "49be1940cc4bd973ee3aa06ece67fabc"
+else
+  import_config "prod.secrets.exs"
+end

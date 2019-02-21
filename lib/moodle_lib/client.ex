@@ -1,33 +1,20 @@
 defmodule MoodleLib.Client do
   alias MoodleLib.User
-  # http://localhost:8080/webservice/rest/server.php?
-  # wstoken={{TOKEN}}&
-  # wsfunction=core_user_create_users&
-  # moodlewsrestformat=json&
-  # users[0][username]=user2&
-  # users[0][password]=Passw0rd-&
-  # users[0][firstname]=Example&
-  # users[0][lastname]=User&
-  # users[0][email]=user3@example.com&
-  # users[0][customfields][0][type]=Patrocinador&
-  # users[0][customfields][0][value]=Alter&
-  # users[0][customfields][1][type]=NIF&
-  # users[0][customfields][1][value]=123456789Z
+
+  def create_user(user_params) do
+    user_params
+    |> build_user()
+    |> prepare_user()
+    |> to_querystring()
+    |> build_uri()
+    |> HTTPoison.get!()
+    |> process_request()
+  end
+
   def build_user(user_params) do
     user_params
     |> group_customfields()
     |> (&struct(User, &1)).()
-  end
-
-  def create_user(user_params) do
-    IO.inspect(
-      user_params
-      |> build_user()
-      |> prepare_user()
-      |> to_querystring()
-    )
-
-    # |> build_uri()
   end
 
   defp prepare_user(user) do
@@ -40,24 +27,48 @@ defmodule MoodleLib.Client do
   defp to_querystring(user) do
     user
     |> flatten_custom_fields()
+    |> Map.put(:createpassword, 1)
     |> Enum.reduce(%{}, fn {k, v}, acc ->
       Map.put(acc, "users[0][#{k}]", v)
     end)
   end
 
+  defp build_uri(user) do
+    Application.get_env(:moodle_lib, :base_url)
+    |> URI.parse()
+    |> Map.put(:query, query_params(user))
+    |> to_string()
+  end
+
+  defp process_request(%HTTPoison.Response{body: body}) do
+    parsed_body = body |> Jason.decode!()
+    case parsed_body do
+      [%{"id" => id, "username" => username}] ->
+        {:ok, %{id: id, username: username}}
+      _ ->
+        {:error, message: "Error creating the username"}
+    end
+  end
+
+  defp query_params(user) do
+    user
+    |> Map.put(:wstoken, Application.get_env(:moodle_lib, :token))
+    |> Map.put(:wsfunction, :core_user_create_users)
+    |> Map.put(:moodlewsrestformat, :json)
+    |> Map.to_list()
+    |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
+    |> Enum.join("&")
+  end
+
   defp flatten_custom_fields(params) do
     params.customfields
     |> Enum.with_index()
-    |> Enum.reduce(%{}, fn {{k,v}, idx}, acc ->
+    |> Enum.reduce(%{}, fn {{k, v}, idx}, acc ->
       acc = Map.put(acc, "customfields][#{idx}][type", "#{k}")
       Map.put(acc, "customfields][#{idx}][value", v)
     end)
     |> Map.merge(params)
     |> Map.delete(:customfields)
-  end
-
-  def prepare_customfields(user) do
-    user.customfields
   end
 
   defp group_customfields(params) do
@@ -72,9 +83,5 @@ defmodule MoodleLib.Client do
       end)
 
     Map.put(params, :customfields, customfields)
-  end
-
-  defp url do
-    "http://localhost:8080/webservice/rest/server.php"
   end
 end
