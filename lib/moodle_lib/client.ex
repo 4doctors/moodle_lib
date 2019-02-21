@@ -6,9 +6,18 @@ defmodule MoodleLib.Client do
     |> build_user()
     |> prepare_user()
     |> to_querystring()
+    |> Map.put(:wsfunction, :core_user_create_users)
     |> build_uri()
     |> HTTPoison.get!()
-    |> process_request()
+    |> process_user_created()
+  end
+
+  def delete_user(id) do
+    %{"userids[0]" => id}
+    |> Map.put(:wsfunction, :core_user_delete_users)
+    |> build_uri()
+    |> HTTPoison.get!()
+    |> process_user_deleted()
   end
 
   def build_user(user_params) do
@@ -33,14 +42,14 @@ defmodule MoodleLib.Client do
     end)
   end
 
-  defp build_uri(user) do
+  defp build_uri(params) do
     Application.get_env(:moodle_lib, :base_url)
     |> URI.parse()
-    |> Map.put(:query, query_params(user))
+    |> Map.put(:query, query_params(params))
     |> to_string()
   end
 
-  defp process_request(%HTTPoison.Response{body: body}) do
+  defp process_user_created(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!()
     case parsed_body do
       [%{"id" => id, "username" => username}] ->
@@ -50,10 +59,20 @@ defmodule MoodleLib.Client do
     end
   end
 
+  defp process_user_deleted(%HTTPoison.Response{body: body}) do
+    parsed_body = body |> Jason.decode!()
+    case parsed_body do
+      nil ->
+        {:ok, message: "User successfully deleted"}
+      _ ->
+        {:error, message: "Error deleting the username"}
+    end
+  end
+
+
   defp query_params(user) do
     user
     |> Map.put(:wstoken, Application.get_env(:moodle_lib, :token))
-    |> Map.put(:wsfunction, :core_user_create_users)
     |> Map.put(:moodlewsrestformat, :json)
     |> Map.to_list()
     |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
