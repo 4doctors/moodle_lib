@@ -26,6 +26,17 @@ defmodule MoodleLib.Client do
     |> (&struct(User, &1)).()
   end
 
+  def get_user(id) do
+    %{
+      "criteria[0][key]" => "id",
+      "criteria[0][value]" => id
+    }
+    |> Map.put(:wsfunction, :core_user_get_users)
+    |> build_uri()
+    |> HTTPoison.get!()
+    |> process_got_user()
+  end
+
   defp prepare_user(user) do
     user
     |> Map.from_struct()
@@ -50,25 +61,40 @@ defmodule MoodleLib.Client do
   end
 
   defp process_user_created(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!()
+    parsed_body = body |> Jason.decode!(keys: :atoms)
+
     case parsed_body do
-      [%{"id" => id, "username" => username}] ->
-        {:ok, %{id: id, username: username}}
+      [%{id: _} = user] ->
+        {:ok, user}
+
       _ ->
         {:error, message: "Error creating the username"}
     end
   end
 
   defp process_user_deleted(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!()
+    parsed_body = body |> Jason.decode!(keys: :atoms)
+
     case parsed_body do
       nil ->
         {:ok, message: "User successfully deleted"}
+
       _ ->
         {:error, message: "Error deleting the username"}
     end
   end
 
+  defp process_got_user(%HTTPoison.Response{body: body}) do
+    parsed_body = body |> Jason.decode!(keys: :atoms)
+
+    case parsed_body do
+      %{users: [%{id: _} = user]} ->
+        {:ok, user}
+
+      %{users: []} ->
+        {:error, message: "User not found"}
+    end
+  end
 
   defp query_params(user) do
     user

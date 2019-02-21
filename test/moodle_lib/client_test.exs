@@ -60,4 +60,24 @@ defmodule MoodleLib.ClientTest do
 
     assert {:ok, _message} = Client.delete_user(new_user.id)
   end
+
+  test "it can retriecve user details" do
+    params = %{
+      username: "j.doe",
+      firstname: "John",
+      lastname: "Doe",
+      email: "j.doe@example.com",
+      one: "extra",
+      something: "else"
+    }
+
+    {:ok, new_user} = Client.create_user(params)
+    {:ok, user_details} = Client.get_user(new_user.id)
+
+    on_exit(fn -> Client.delete_user(new_user.id) end)
+
+    assert user_details.email == params.email
+    assert user_details.firstname == params.firstname
+    assert user_details.lastname == params.lastname
+  end
 end
