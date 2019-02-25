@@ -1,5 +1,6 @@
 defmodule MoodleLib.Client.Users do
   alias MoodleLib.User
+  alias MoodleLib.Client.Common
 
   def create_user(user_params) do
     user_params
@@ -7,7 +8,7 @@ defmodule MoodleLib.Client.Users do
     |> prepare_user()
     |> to_querystring()
     |> Map.put(:wsfunction, :core_user_create_users)
-    |> build_uri()
+    |> Common.build_uri()
     |> HTTPoison.get!()
     |> process_user_created()
   end
@@ -15,7 +16,7 @@ defmodule MoodleLib.Client.Users do
   def delete_user(id) do
     %{"userids[0]" => id}
     |> Map.put(:wsfunction, :core_user_delete_users)
-    |> build_uri()
+    |> Common.build_uri()
     |> HTTPoison.get!()
     |> process_user_deleted()
   end
@@ -32,7 +33,7 @@ defmodule MoodleLib.Client.Users do
       "criteria[0][value]" => id
     }
     |> Map.put(:wsfunction, :core_user_get_users)
-    |> build_uri()
+    |> Common.build_uri()
     |> HTTPoison.get!()
     |> process_got_user()
   end
@@ -44,7 +45,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.new()
     |> Map.put(:field, :id)
     |> Map.put(:wsfunction, :core_user_get_users_by_field)
-    |> build_uri()
+    |> Common.build_uri()
     |> HTTPoison.get!()
     |> process_got_users()
   end
@@ -63,13 +64,6 @@ defmodule MoodleLib.Client.Users do
     |> Enum.reduce(%{}, fn {k, v}, acc ->
       Map.put(acc, "users[0][#{k}]", v)
     end)
-  end
-
-  defp build_uri(params) do
-    Application.get_env(:moodle_lib, :base_url)
-    |> URI.parse()
-    |> Map.put(:query, query_params(params))
-    |> to_string()
   end
 
   defp process_user_created(%HTTPoison.Response{body: body}) do
@@ -118,15 +112,6 @@ defmodule MoodleLib.Client.Users do
       [] ->
         {:error, message: "No users found"}
     end
-  end
-
-  defp query_params(user) do
-    user
-    |> Map.put(:wstoken, Application.get_env(:moodle_lib, :token))
-    |> Map.put(:moodlewsrestformat, :json)
-    |> Map.to_list()
-    |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
-    |> Enum.join("&")
   end
 
   defp flatten_custom_fields(params) do
