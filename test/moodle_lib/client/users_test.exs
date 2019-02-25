@@ -62,4 +62,25 @@ defmodule MoodleLib.Client.UsersTest do
     assert user_details.firstname == @default_params.firstname
     assert user_details.lastname == @default_params.lastname
   end
+
+  test "it can retrieve multiple users given their ids" do
+    {:ok, user1} = Users.create_user(@default_params)
+
+    {:ok, user2} =
+      Users.create_user(%{
+        username: "jane",
+        email: "jane@example.com",
+        firstname: "Jane",
+        lastname: "Doe"
+      })
+
+    on_exit(fn ->
+      Users.delete_user(user1.id)
+      Users.delete_user(user2.id)
+    end)
+
+    {:ok, users} = Users.get_users([user1.id, user2.id])
+    assert Enum.count(users) == 2
+    assert users |> Enum.map(&Map.take(&1, [:id])) == [%{id: user1.id}, %{id: user2.id}]
+  end
 end

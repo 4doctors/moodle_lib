@@ -37,6 +37,18 @@ defmodule MoodleLib.Client.Users do
     |> process_got_user()
   end
 
+  def get_users(ids) do
+    ids
+    |> Enum.with_index()
+    |> Enum.map(fn {id, idx} -> {"values[#{idx}]", id} end)
+    |> Map.new()
+    |> Map.put(:field, :id)
+    |> Map.put(:wsfunction, :core_user_get_users_by_field)
+    |> build_uri()
+    |> HTTPoison.get!()
+    |> process_got_users()
+  end
+
   defp prepare_user(user) do
     user
     |> Map.from_struct()
@@ -93,6 +105,18 @@ defmodule MoodleLib.Client.Users do
 
       %{users: []} ->
         {:error, message: "User not found"}
+    end
+  end
+
+  defp process_got_users(%HTTPoison.Response{body: body}) do
+    parsed_body = body |> Jason.decode!(keys: :atoms)
+
+    case parsed_body do
+      [_ | _] = users ->
+        {:ok, users}
+
+      [] ->
+        {:error, message: "No users found"}
     end
   end
 
