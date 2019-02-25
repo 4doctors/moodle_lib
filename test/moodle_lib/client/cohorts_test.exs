@@ -1,7 +1,7 @@
 defmodule MoodleLib.Client.CohortsTest do
   use ExUnit.Case
 
-  alias MoodleLib.Client.Cohorts
+  alias MoodleLib.Client.{Cohorts, Users}
 
   @default_params %{
     name: "Test",
@@ -32,5 +32,31 @@ defmodule MoodleLib.Client.CohortsTest do
     {:ok, cohort} = Cohorts.create_cohort(@default_params)
 
     assert {:ok, _message} = Cohorts.delete_cohort(cohort.id)
+  end
+
+  test "it can add a user to the cohort" do
+    {:ok, user} =
+      Users.create_user(%{
+        username: "john",
+        email: "j.doe@example.com",
+        firstname: "John",
+        lastname: "Doe"
+      })
+
+    {:ok, cohort} = Cohorts.create_cohort(@default_params)
+
+    {:ok, users} = Cohorts.get_cohort_members(cohort.id)
+    refute Enum.member?(users, user.id)
+
+    {:ok, users} = Cohorts.add_user_to_cohort(cohort, user)
+    assert Enum.member?(users, user.id)
+
+    {:ok, users} = Cohorts.remove_user_to_cohort(cohort, user)
+    refute Enum.member?(users, user.id)
+
+    on_exit(fn ->
+      Users.delete_user(user.id)
+      Cohorts.delete_cohort(cohort.id)
+    end)
   end
 end
