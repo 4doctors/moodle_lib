@@ -1,7 +1,7 @@
-defmodule MoodleLib.ClientTest do
+defmodule MoodleLib.Client.UsersTest do
   use ExUnit.Case
 
-  alias MoodleLib.{Client, User}
+  alias MoodleLib.{Client.Users, User}
 
   @default_params %{
     username: "j.doe",
@@ -19,7 +19,7 @@ defmodule MoodleLib.ClientTest do
       email: "j.doe@example.com"
     }
 
-    %User{} = new_user = Client.build_user(params)
+    %User{} = new_user = Users.build_user(params)
 
     assert new_user.email == params.email
   end
@@ -32,31 +32,31 @@ defmodule MoodleLib.ClientTest do
       something: "else"
     }
 
-    new_user = Client.build_user(params)
+    new_user = Users.build_user(params)
 
     assert new_user.customfields.something == params.something
   end
 
   test "it can create a new user" do
-    {:ok, new_user} = Client.create_user(@default_params)
+    {:ok, new_user} = Users.create_user(@default_params)
 
-    on_exit(fn -> Client.delete_user(new_user.id) end)
+    on_exit(fn -> Users.delete_user(new_user.id) end)
 
     assert new_user.id |> to_string() =~ ~r/^\d+$/
     assert new_user.username == "j.doe"
   end
 
   test "it can delete a user" do
-    {:ok, new_user} = Client.create_user(@default_params)
+    {:ok, new_user} = Users.create_user(@default_params)
 
-    assert {:ok, _message} = Client.delete_user(new_user.id)
+    assert {:ok, _message} = Users.delete_user(new_user.id)
   end
 
   test "it can retriecve user details" do
-    {:ok, new_user} = Client.create_user(@default_params)
-    {:ok, user_details} = Client.get_user(new_user.id)
+    {:ok, new_user} = Users.create_user(@default_params)
+    {:ok, user_details} = Users.get_user(new_user.id)
 
-    on_exit(fn -> Client.delete_user(new_user.id) end)
+    on_exit(fn -> Users.delete_user(new_user.id) end)
 
     assert user_details.email == @default_params.email
     assert user_details.firstname == @default_params.firstname

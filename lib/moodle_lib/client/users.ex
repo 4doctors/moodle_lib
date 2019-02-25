@@ -1,4 +1,4 @@
-defmodule MoodleLib.Client do
+defmodule MoodleLib.Client.Users do
   alias MoodleLib.User
 
   def create_user(user_params) do
