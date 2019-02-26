@@ -32,7 +32,7 @@ use Mix.Config
 if Mix.env() != :prod do
   config :moodle_lib,
     base_url: "http://localhost:8080/webservice/rest/server.php",
-    token: "49be1940cc4bd973ee3aa06ece67fabc"
+    token: "c9bca4c37ef440ee63f69931274ec9a9"
 else
   import_config "prod.secrets.exs"
 end
