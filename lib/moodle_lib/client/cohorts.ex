@@ -1,11 +1,10 @@
 defmodule MoodleLib.Client.Cohorts do
-  alias MoodleLib.Client.Common
+  import MoodleLib.Client.Common, only: [process_request: 1]
 
   def get_cohort(id) do
     %{"cohortids[0]" => id}
     |> Map.put(:wsfunction, :core_cohort_get_cohorts)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_got_cohort()
   end
 
@@ -16,24 +15,21 @@ defmodule MoodleLib.Client.Cohorts do
     |> Enum.map(fn {k, v} -> {"cohorts[0][#{k}]", v} end)
     |> Map.new()
     |> Map.put(:wsfunction, :core_cohort_create_cohorts)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_created_cohort()
   end
 
   def delete_cohort(id) do
     %{"cohortids[0]" => id}
     |> Map.put(:wsfunction, :core_cohort_delete_cohorts)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_cohort_deleted()
   end
 
   def get_cohort_members(id) do
     %{"cohortids[0]" => id}
     |> Map.put(:wsfunction, :core_cohort_get_cohort_members)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_got_cohort_members()
   end
 
@@ -45,8 +41,7 @@ defmodule MoodleLib.Client.Cohorts do
       "members[0][usertype][value]" => user.id
     }
     |> Map.put(:wsfunction, :core_cohort_add_cohort_members)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_added_cohort_member(cohort.id)
   end
 
@@ -56,15 +51,12 @@ defmodule MoodleLib.Client.Cohorts do
       "members[0][userid]" => user.id
     }
     |> Map.put(:wsfunction, :core_cohort_delete_cohort_members)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_removed_cohort_member(cohort.id)
   end
 
-  defp handle_added_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_added_cohort_member(response_body, cohort_id) do
+    case response_body do
       %{warnings: []} ->
         get_cohort_members(cohort_id)
 
@@ -76,10 +68,8 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp handle_removed_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_removed_cohort_member(response_body, cohort_id) do
+    case response_body do
       nil ->
         get_cohort_members(cohort_id)
 
@@ -88,10 +78,8 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp handle_got_cohort(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_got_cohort(response_body) do
+    case response_body do
       [%{} = cohort] ->
         {:ok, cohort}
 
@@ -100,10 +88,8 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp handle_got_cohort_members(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_got_cohort_members(response_body) do
+    case response_body do
       [%{cohortid: _id, userids: users}] ->
         {:ok, users}
 
@@ -112,10 +98,8 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp handle_created_cohort(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_created_cohort(response_body) do
+    case response_body do
       [%{} = cohort] ->
         {:ok, cohort}
 
@@ -124,10 +108,8 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp handle_cohort_deleted(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_cohort_deleted(response_body) do
+    case response_body do
       nil ->
         {:ok, message: "Cohort successfully deleted"}
 

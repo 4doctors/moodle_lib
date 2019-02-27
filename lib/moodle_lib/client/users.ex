@@ -1,6 +1,7 @@
 defmodule MoodleLib.Client.Users do
   alias MoodleLib.User
-  alias MoodleLib.Client.Common
+
+  import MoodleLib.Client.Common, only: [process_request: 1]
 
   def create_user(user_params) do
     user_params
@@ -8,16 +9,14 @@ defmodule MoodleLib.Client.Users do
     |> prepare_user()
     |> to_querystring()
     |> Map.put(:wsfunction, :core_user_create_users)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_user_created()
   end
 
   def delete_user(id) do
     %{"userids[0]" => id}
     |> Map.put(:wsfunction, :core_user_delete_users)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_user_deleted()
   end
 
@@ -33,8 +32,7 @@ defmodule MoodleLib.Client.Users do
       "criteria[0][value]" => id
     }
     |> Map.put(:wsfunction, :core_user_get_users)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_got_user()
   end
 
@@ -45,8 +43,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.new()
     |> Map.put(:field, :id)
     |> Map.put(:wsfunction, :core_user_get_users_by_field)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request()
     |> handle_got_users()
   end
 
@@ -66,10 +63,8 @@ defmodule MoodleLib.Client.Users do
     end)
   end
 
-  defp handle_user_created(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_user_created(response_body) do
+    case response_body do
       [%{id: _} = user] ->
         {:ok, user}
 
@@ -78,10 +73,8 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp handle_user_deleted(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_user_deleted(response_body) do
+    case response_body do
       nil ->
         {:ok, message: "User successfully deleted"}
 
@@ -90,10 +83,8 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp handle_got_user(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_got_user(response_body) do
+    case response_body do
       %{users: [%{id: _} = user]} ->
         {:ok, user}
 
@@ -102,10 +93,8 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp handle_got_users(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_got_users(response_body) do
+    case response_body do
       [_ | _] = users ->
         {:ok, users}
 
