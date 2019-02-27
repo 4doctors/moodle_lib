@@ -1,7 +1,13 @@
 defmodule MoodleLib.Client.UsersTest do
   use ExUnit.Case
+  use ExVCR.Mock, adapter: ExVCR.Adapter.Hackney
 
   alias MoodleLib.{Client.Users, User}
+
+  setup_all do
+    {:ok, _} = HTTPoison.start()
+    :ok
+  end
 
   @default_params %{
     username: "j.doe",
@@ -37,50 +43,45 @@ defmodule MoodleLib.Client.UsersTest do
     assert new_user.customfields.something == params.something
   end
 
-  test "it can create a new user" do
-    {:ok, new_user} = Users.create_user(@default_params)
+  test "it can create/retrieve/delete a single user" do
+    use_cassette "single_user", match_requests_on: [:query] do
+      {:ok, new_user} = Users.create_user(@default_params)
+      {:ok, user_details} = Users.get_user(new_user.id)
 
-    on_exit(fn -> Users.delete_user(new_user.id) end)
+      on_exit(fn ->
+        use_cassette "delete_single_user", match_requests_on: [:query] do
+          Users.delete_user(new_user.id)
+        end
+      end)
 
-    assert new_user.id |> to_string() =~ ~r/^\d+$/
-    assert new_user.username == "j.doe"
-  end
-
-  test "it can delete a user" do
-    {:ok, new_user} = Users.create_user(@default_params)
-
-    assert {:ok, _message} = Users.delete_user(new_user.id)
-  end
-
-  test "it can retriecve user details" do
-    {:ok, new_user} = Users.create_user(@default_params)
-    {:ok, user_details} = Users.get_user(new_user.id)
-
-    on_exit(fn -> Users.delete_user(new_user.id) end)
-
-    assert user_details.email == @default_params.email
-    assert user_details.firstname == @default_params.firstname
-    assert user_details.lastname == @default_params.lastname
+      assert user_details.email == @default_params.email
+      assert user_details.firstname == @default_params.firstname
+      assert user_details.lastname == @default_params.lastname
+    end
   end
 
   test "it can retrieve multiple users given their ids" do
-    {:ok, user1} = Users.create_user(@default_params)
+    use_cassette "multiple_users", match_requests_on: [:query] do
+      {:ok, user1} = Users.create_user(@default_params)
 
-    {:ok, user2} =
-      Users.create_user(%{
-        username: "jane",
-        email: "jane@example.com",
-        firstname: "Jane",
-        lastname: "Doe"
-      })
+      {:ok, user2} =
+        Users.create_user(%{
+          username: "jane",
+          email: "jane@example.com",
+          firstname: "Jane",
+          lastname: "Doe"
+        })
 
-    on_exit(fn ->
-      Users.delete_user(user1.id)
-      Users.delete_user(user2.id)
-    end)
+      on_exit(fn ->
+        use_cassette "delete_multiple_users", match_requests_on: [:query] do
+          Users.delete_user(user1.id)
+          Users.delete_user(user2.id)
+        end
+      end)
 
-    {:ok, users} = Users.get_users([user1.id, user2.id])
-    assert Enum.count(users) == 2
-    assert users |> Enum.map(&Map.take(&1, [:id])) == [%{id: user1.id}, %{id: user2.id}]
+      {:ok, users} = Users.get_users([user1.id, user2.id])
+      assert Enum.count(users) == 2
+      assert users |> Enum.map(&Map.take(&1, [:id])) == [%{id: user1.id}, %{id: user2.id}]
+    end
   end
 end

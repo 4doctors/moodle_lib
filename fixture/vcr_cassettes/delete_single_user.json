@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_delete_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&userids[0]=5"
+    },
+    "response": {
+      "binary": false,
+      "body": "null",
+      "headers": {
+        "Date": "Tue, 26 Feb 2019 17:19:37 GMT",
+        "Server": "Apache/2.4.29 (Ubuntu)",
+        "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "Pragma": "no-cache",
+        "Accept-Ranges": "none",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Length": "4",
+        "Content-Type": "application/json"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

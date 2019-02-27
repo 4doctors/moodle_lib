@@ -22,7 +22,8 @@ defmodule MoodleLib.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.4"},
-      {:jason, "~> 1.1"}
+      {:jason, "~> 1.1"},
+      {:exvcr, "~> 0.10", only: :test}
     ]
   end
 end
