@@ -1,0 +1,83 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_delete_cohorts&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=3"
+    },
+    "response": {
+      "binary": false,
+      "body": "null",
+      "headers": {
+        "Date": "Wed, 27 Feb 2019 08:17:19 GMT",
+        "Server": "Apache/2.4.29 (Ubuntu)",
+        "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "Pragma": "no-cache",
+        "Accept-Ranges": "none",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Length": "4",
+        "Content-Type": "application/json"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_create_cohorts&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohorts[0][categorytype][type]=system&cohorts[0][categorytype][value]=ignored&cohorts[0][idnumber]=test&cohorts[0][name]=Test"
+    },
+    "response": {
+      "binary": false,
+      "body": "[{\"id\":3,\"name\":\"Test\",\"idnumber\":\"test\",\"description\":\"\",\"descriptionformat\":1,\"visible\":true,\"theme\":\"\"}]",
+      "headers": {
+        "Date": "Wed, 27 Feb 2019 08:17:19 GMT",
+        "Server": "Apache/2.4.29 (Ubuntu)",
+        "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "Pragma": "no-cache",
+        "Accept-Ranges": "none",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Length": "107",
+        "Content-Type": "application/json"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  },
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_get_cohorts&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=3"
+    },
+    "response": {
+      "binary": false,
+      "body": "[{\"id\":3,\"name\":\"Test\",\"idnumber\":\"test\",\"description\":\"\",\"descriptionformat\":1,\"visible\":true,\"theme\":\"\"}]",
+      "headers": {
+        "Date": "Wed, 27 Feb 2019 08:17:19 GMT",
+        "Server": "Apache/2.4.29 (Ubuntu)",
+        "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "Pragma": "no-cache",
+        "Accept-Ranges": "none",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Length": "107",
+        "Content-Type": "application/json"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
