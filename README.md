@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/4doctors/moodle_lib.svg?style=svg&circle-token=19b5cb16193a29ba11104117e01c0a3df6bfe8e7)](https://circleci.com/gh/4doctors/moodle_lib)
+
 # MoodleLib
 
 **TODO: Add description**
