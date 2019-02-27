@@ -6,7 +6,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_get_cohorts)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_got_cohort()
+    |> handle_got_cohort()
   end
 
   def create_cohort(params) do
@@ -18,7 +18,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_create_cohorts)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_created_cohort()
+    |> handle_created_cohort()
   end
 
   def delete_cohort(id) do
@@ -26,7 +26,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_delete_cohorts)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_cohort_deleted()
+    |> handle_cohort_deleted()
   end
 
   def get_cohort_members(id) do
@@ -34,7 +34,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_get_cohort_members)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_got_cohort_members()
+    |> handle_got_cohort_members()
   end
 
   def add_user_to_cohort(cohort, user) do
@@ -47,7 +47,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_add_cohort_members)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_added_cohort_member(cohort.id)
+    |> handle_added_cohort_member(cohort.id)
   end
 
   def remove_user_from_cohort(cohort, user) do
@@ -58,10 +58,10 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put(:wsfunction, :core_cohort_delete_cohort_members)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_removed_cohort_member(cohort.id)
+    |> handle_removed_cohort_member(cohort.id)
   end
 
-  defp process_added_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
+  defp handle_added_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -76,7 +76,7 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp process_removed_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
+  defp handle_removed_cohort_member(%HTTPoison.Response{body: body}, cohort_id) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -88,7 +88,7 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp process_got_cohort(%HTTPoison.Response{body: body}) do
+  defp handle_got_cohort(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -100,7 +100,7 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp process_got_cohort_members(%HTTPoison.Response{body: body}) do
+  defp handle_got_cohort_members(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -112,7 +112,7 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp process_created_cohort(%HTTPoison.Response{body: body}) do
+  defp handle_created_cohort(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -124,7 +124,7 @@ defmodule MoodleLib.Client.Cohorts do
     end
   end
 
-  defp process_cohort_deleted(%HTTPoison.Response{body: body}) do
+  defp handle_cohort_deleted(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do

@@ -10,7 +10,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.put(:wsfunction, :core_user_create_users)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_user_created()
+    |> handle_user_created()
   end
 
   def delete_user(id) do
@@ -18,7 +18,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.put(:wsfunction, :core_user_delete_users)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_user_deleted()
+    |> handle_user_deleted()
   end
 
   def build_user(user_params) do
@@ -35,7 +35,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.put(:wsfunction, :core_user_get_users)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_got_user()
+    |> handle_got_user()
   end
 
   def get_users(ids) do
@@ -47,7 +47,7 @@ defmodule MoodleLib.Client.Users do
     |> Map.put(:wsfunction, :core_user_get_users_by_field)
     |> Common.build_uri()
     |> HTTPoison.get!()
-    |> process_got_users()
+    |> handle_got_users()
   end
 
   defp prepare_user(user) do
@@ -66,7 +66,7 @@ defmodule MoodleLib.Client.Users do
     end)
   end
 
-  defp process_user_created(%HTTPoison.Response{body: body}) do
+  defp handle_user_created(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -78,7 +78,7 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp process_user_deleted(%HTTPoison.Response{body: body}) do
+  defp handle_user_deleted(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -90,7 +90,7 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp process_got_user(%HTTPoison.Response{body: body}) do
+  defp handle_got_user(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
@@ -102,7 +102,7 @@ defmodule MoodleLib.Client.Users do
     end
   end
 
-  defp process_got_users(%HTTPoison.Response{body: body}) do
+  defp handle_got_users(%HTTPoison.Response{body: body}) do
     parsed_body = body |> Jason.decode!(keys: :atoms)
 
     case parsed_body do
