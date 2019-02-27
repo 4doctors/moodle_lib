@@ -51,7 +51,7 @@ defmodule MoodleLib.Client.CohortsTest do
     {:ok, users} = Cohorts.add_user_to_cohort(cohort, user)
     assert Enum.member?(users, user.id)
 
-    {:ok, users} = Cohorts.remove_user_to_cohort(cohort, user)
+      {:ok, users} = Cohorts.remove_user_from_cohort(cohort, user)
     refute Enum.member?(users, user.id)
 
     on_exit(fn ->

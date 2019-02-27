@@ -50,7 +50,7 @@ defmodule MoodleLib.Client.Cohorts do
     |> process_added_cohort_member(cohort.id)
   end
 
-  def remove_user_to_cohort(cohort, user) do
+  def remove_user_from_cohort(cohort, user) do
     %{
       "members[0][cohortid]" => cohort.id,
       "members[0][userid]" => user.id
