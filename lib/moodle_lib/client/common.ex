@@ -1,6 +1,7 @@
 defmodule MoodleLib.Client.Common do
-  def process_request(params) do
+  def process_request(params, fn_name) do
     params
+    |> Map.put(:wsfunction, fn_name)
     |> build_uri()
     |> HTTPoison.get!()
     |> extract_body()

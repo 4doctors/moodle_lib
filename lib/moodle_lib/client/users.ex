@@ -1,22 +1,20 @@
 defmodule MoodleLib.Client.Users do
   alias MoodleLib.User
 
-  import MoodleLib.Client.Common, only: [process_request: 1]
+  import MoodleLib.Client.Common, only: [process_request: 2]
 
   def create_user(user_params) do
     user_params
     |> build_user()
     |> prepare_user()
     |> to_querystring()
-    |> Map.put(:wsfunction, :core_user_create_users)
-    |> process_request()
+    |> process_request(:core_user_create_users)
     |> handle_user_created()
   end
 
   def delete_user(id) do
     %{"userids[0]" => id}
-    |> Map.put(:wsfunction, :core_user_delete_users)
-    |> process_request()
+    |> process_request(:core_user_delete_users)
     |> handle_user_deleted()
   end
 
@@ -31,8 +29,7 @@ defmodule MoodleLib.Client.Users do
       "criteria[0][key]" => "id",
       "criteria[0][value]" => id
     }
-    |> Map.put(:wsfunction, :core_user_get_users)
-    |> process_request()
+    |> process_request(:core_user_get_users)
     |> handle_got_user()
   end
 
@@ -42,8 +39,7 @@ defmodule MoodleLib.Client.Users do
     |> Enum.map(fn {id, idx} -> {"values[#{idx}]", id} end)
     |> Map.new()
     |> Map.put(:field, :id)
-    |> Map.put(:wsfunction, :core_user_get_users_by_field)
-    |> process_request()
+    |> process_request(:core_user_get_users_by_field)
     |> handle_got_users()
   end
 

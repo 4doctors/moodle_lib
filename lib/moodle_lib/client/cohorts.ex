@@ -1,10 +1,9 @@
 defmodule MoodleLib.Client.Cohorts do
-  import MoodleLib.Client.Common, only: [process_request: 1]
+  import MoodleLib.Client.Common, only: [process_request: 2]
 
   def get_cohort(id) do
     %{"cohortids[0]" => id}
-    |> Map.put(:wsfunction, :core_cohort_get_cohorts)
-    |> process_request()
+    |> process_request(:core_cohort_get_cohorts)
     |> handle_got_cohort()
   end
 
@@ -14,22 +13,19 @@ defmodule MoodleLib.Client.Cohorts do
     |> Map.put("categorytype][value", "ignored")
     |> Enum.map(fn {k, v} -> {"cohorts[0][#{k}]", v} end)
     |> Map.new()
-    |> Map.put(:wsfunction, :core_cohort_create_cohorts)
-    |> process_request()
+    |> process_request(:core_cohort_create_cohorts)
     |> handle_created_cohort()
   end
 
   def delete_cohort(id) do
     %{"cohortids[0]" => id}
-    |> Map.put(:wsfunction, :core_cohort_delete_cohorts)
-    |> process_request()
+    |> process_request(:core_cohort_delete_cohorts)
     |> handle_cohort_deleted()
   end
 
   def get_cohort_members(id) do
     %{"cohortids[0]" => id}
-    |> Map.put(:wsfunction, :core_cohort_get_cohort_members)
-    |> process_request()
+    |> process_request(:core_cohort_get_cohort_members)
     |> handle_got_cohort_members()
   end
 
@@ -40,8 +36,7 @@ defmodule MoodleLib.Client.Cohorts do
       "members[0][usertype][type]" => "id",
       "members[0][usertype][value]" => user.id
     }
-    |> Map.put(:wsfunction, :core_cohort_add_cohort_members)
-    |> process_request()
+    |> process_request(:core_cohort_add_cohort_members)
     |> handle_added_cohort_member(cohort.id)
   end
 
@@ -50,8 +45,7 @@ defmodule MoodleLib.Client.Cohorts do
       "members[0][cohortid]" => cohort.id,
       "members[0][userid]" => user.id
     }
-    |> Map.put(:wsfunction, :core_cohort_delete_cohort_members)
-    |> process_request()
+    |> process_request(:core_cohort_delete_cohort_members)
     |> handle_removed_cohort_member(cohort.id)
   end
 
