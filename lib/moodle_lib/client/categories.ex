@@ -1,18 +1,14 @@
 defmodule MoodleLib.Client.Categories do
-  alias MoodleLib.Client.Common
+  import MoodleLib.Client.Common, only: [process_request: 2]
 
   def get_categories do
     %{}
-    |> Map.put(:wsfunction, :core_course_get_categories)
-    |> Common.build_uri()
-    |> HTTPoison.get!()
+    |> process_request(:core_course_get_categories)
     |> handle_got_categories()
   end
 
-  defp handle_got_categories(%HTTPoison.Response{body: body}) do
-    parsed_body = body |> Jason.decode!(keys: :atoms)
-
-    case parsed_body do
+  defp handle_got_categories(request_body) do
+    case request_body do
       [_ | _] = categories ->
         {:ok, categories}
 
