@@ -10,16 +10,16 @@
     },
     "response": {
       "binary": false,
-      "body": "[{\"id\":5,\"username\":\"j.doe\"}]",
+      "body": "[{\"id\":45,\"username\":\"j.doe\"}]",
       "headers": {
-        "Date": "Tue, 26 Feb 2019 17:19:37 GMT",
+        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "29",
+        "Content-Length": "30",
         "Content-Type": "application/json"
       },
       "status_code": 200,
@@ -33,20 +33,20 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_get_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&criteria[0][key]=id&criteria[0][value]=5"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_get_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&criteria[0][key]=id&criteria[0][value]=45"
     },
     "response": {
       "binary": false,
-      "body": "{\"users\":[{\"id\":5,\"username\":\"j.doe\",\"firstname\":\"John\",\"lastname\":\"Doe\",\"fullname\":\"John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
+      "body": "{\"users\":[{\"id\":45,\"username\":\"j.doe\",\"firstname\":\"John\",\"lastname\":\"Doe\",\"fullname\":\"John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
       "headers": {
-        "Date": "Tue, 26 Feb 2019 17:19:37 GMT",
+        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "484",
+        "Content-Length": "485",
         "Content-Type": "application/json"
       },
       "status_code": 200,
