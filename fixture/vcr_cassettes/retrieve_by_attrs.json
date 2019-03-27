@@ -6,13 +6,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_create_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&users[0][createpassword]=1&users[0][customfields][0][type]=one&users[0][customfields][0][value]=extra&users[0][customfields][1][type]=something&users[0][customfields][1][value]=else&users[0][email]=j.doe@example.com&users[0][firstname]=John&users[0][lastname]=Doe&users[0][username]=j.doe"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_create_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&users[0][createpassword]=1&users[0][customfields][0][type]=one&users[0][customfields][0][value]=extra&users[0][customfields][1][type]=something&users[0][customfields][1][value]=else&users[0][email]=j.doe@example.com&users[0][firstname]=Sir%20John&users[0][lastname]=Doe&users[0][username]=j.doe"
     },
     "response": {
       "binary": false,
-      "body": "[{\"id\":47,\"username\":\"j.doe\"}]",
+      "body": "[{\"id\":63,\"username\":\"j.doe\"}]",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:51:59 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:34 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -37,16 +37,16 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"users\":[{\"id\":47,\"username\":\"j.doe\",\"firstname\":\"John\",\"lastname\":\"Doe\",\"fullname\":\"John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
+      "body": "{\"users\":[{\"id\":63,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:51:59 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:35 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "485",
+        "Content-Length": "493",
         "Content-Type": "application/json"
       },
       "status_code": 200,
@@ -64,16 +64,16 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"users\":[{\"id\":47,\"username\":\"j.doe\",\"firstname\":\"John\",\"lastname\":\"Doe\",\"fullname\":\"John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
+      "body": "{\"users\":[{\"id\":63,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:51:59 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:35 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "485",
+        "Content-Length": "493",
         "Content-Type": "application/json"
       },
       "status_code": 200,

@@ -10,9 +10,9 @@
     },
     "response": {
       "binary": false,
-      "body": "[{\"id\":46,\"username\":\"john\"}]",
+      "body": "[{\"id\":67,\"username\":\"john\"}]",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:36 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -37,9 +37,9 @@
     },
     "response": {
       "binary": false,
-      "body": "[{\"id\":7,\"name\":\"Test\",\"idnumber\":\"test\",\"description\":\"\",\"descriptionformat\":1,\"visible\":true,\"theme\":\"\"}]",
+      "body": "[{\"id\":6,\"name\":\"Test\",\"idnumber\":\"test\",\"description\":\"\",\"descriptionformat\":1,\"visible\":true,\"theme\":\"\"}]",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:36 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -60,13 +60,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_add_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&members[0][cohorttype][type]=id&members[0][cohorttype][value]=7&members[0][usertype][type]=id&members[0][usertype][value]=46"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_add_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&members[0][cohorttype][type]=id&members[0][cohorttype][value]=6&members[0][usertype][type]=id&members[0][usertype][value]=67"
     },
     "response": {
       "binary": false,
       "body": "{\"warnings\":[]}",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:36 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -87,13 +87,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_get_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=7"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_get_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=6"
     },
     "response": {
       "binary": false,
-      "body": "[{\"cohortid\":7,\"userids\":[46]}]",
+      "body": "[{\"cohortid\":6,\"userids\":[67]}]",
       "headers": {
-        "Date": "Mon, 25 Mar 2019 08:50:29 GMT",
+        "Date": "Wed, 27 Mar 2019 18:50:36 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",

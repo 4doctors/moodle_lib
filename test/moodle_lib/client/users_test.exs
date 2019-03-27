@@ -11,7 +11,7 @@ defmodule MoodleLib.Client.UsersTest do
 
   @default_params %{
     username: "j.doe",
-    firstname: "John",
+    firstname: "Sir John",
     lastname: "Doe",
     email: "j.doe@example.com",
     one: "extra",

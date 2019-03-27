@@ -25,5 +25,6 @@ defmodule MoodleLib.Client.Common do
     |> Map.to_list()
     |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
     |> Enum.join("&")
+    |> URI.encode()
   end
 end
