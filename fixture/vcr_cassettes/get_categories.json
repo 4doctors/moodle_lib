@@ -12,7 +12,7 @@
       "binary": false,
       "body": "[{\"id\":1,\"name\":\"Miscellaneous\",\"idnumber\":null,\"description\":\"\",\"descriptionformat\":1,\"parent\":0,\"sortorder\":10000,\"coursecount\":0,\"visible\":1,\"visibleold\":1,\"timemodified\":1551200755,\"depth\":1,\"path\":\"\\/1\",\"theme\":\"\"},{\"id\":2,\"name\":\"category 1\",\"idnumber\":\"cat1\",\"description\":\"<p>category 1 description<\\/p>\",\"descriptionformat\":1,\"parent\":0,\"sortorder\":20000,\"coursecount\":1,\"visible\":1,\"visibleold\":1,\"timemodified\":1551282934,\"depth\":1,\"path\":\"\\/2\",\"theme\":\"\"},{\"id\":3,\"name\":\"category 1.1\",\"idnumber\":\"cat1_1\",\"description\":\"<p>Category 1.1 description<\\/p>\",\"descriptionformat\":1,\"parent\":2,\"sortorder\":30000,\"coursecount\":0,\"visible\":1,\"visibleold\":1,\"timemodified\":1551282975,\"depth\":2,\"path\":\"\\/2\\/3\",\"theme\":\"\"},{\"id\":4,\"name\":\"category 2\",\"idnumber\":\"cat2\",\"description\":\"<p>Category 2 description<\\/p>\",\"descriptionformat\":1,\"parent\":0,\"sortorder\":40000,\"coursecount\":0,\"visible\":1,\"visibleold\":1,\"timemodified\":1551283019,\"depth\":1,\"path\":\"\\/4\",\"theme\":\"\"}]",
       "headers": {
-        "Date": "Wed, 27 Feb 2019 17:30:01 GMT",
+        "Date": "Mon, 25 Mar 2019 08:50:30 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",

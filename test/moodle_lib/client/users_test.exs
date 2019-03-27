@@ -43,6 +43,24 @@ defmodule MoodleLib.Client.UsersTest do
     assert new_user.customfields.something == params.something
   end
 
+  test "it can retrieve a user by email or username" do
+    use_cassette "retrieve_by_attrs", match_requests_on: [:query] do
+      user_params = @default_params
+      {:ok, new_user} = Users.create_user(user_params)
+      {:ok, user_by_username} = Users.get_user({:username, user_params[:username]})
+      {:ok, user_by_email} = Users.get_user({:email, user_params[:email]})
+
+      on_exit(fn ->
+        use_cassette "delete_attrs_user", match_requests_on: [:query] do
+          Users.delete_user(user_by_email.id)
+        end
+      end)
+
+      assert new_user.id == user_by_username.id
+      assert new_user.id == user_by_email.id
+    end
+  end
+
   test "it can create/retrieve/delete a single user" do
     use_cassette "single_user", match_requests_on: [:query] do
       {:ok, new_user} = Users.create_user(@default_params)

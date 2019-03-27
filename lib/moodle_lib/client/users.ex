@@ -24,11 +24,32 @@ defmodule MoodleLib.Client.Users do
     |> (&struct(User, &1)).()
   end
 
-  def get_user(id) do
+  def get_user(id) when is_integer(id) do
     %{
       "criteria[0][key]" => "id",
       "criteria[0][value]" => id
     }
+    |> do_get_user()
+  end
+
+  def get_user({:username, username}) do
+    %{
+      "criteria[0][key]" => "username",
+      "criteria[0][value]" => username
+    }
+    |> do_get_user()
+  end
+
+  def get_user({:email, email}) do
+    %{
+      "criteria[0][key]" => "email",
+      "criteria[0][value]" => email
+    }
+    |> do_get_user()
+  end
+
+  defp do_get_user(params) do
+    params
     |> process_request(:core_user_get_users)
     |> handle_got_user()
   end
