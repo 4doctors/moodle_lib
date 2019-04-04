@@ -6,13 +6,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_delete_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&members[0][cohortid]=6&members[0][userid]=67"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_delete_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&members[0][cohortid]=5&members[0][userid]=99"
     },
     "response": {
       "binary": false,
       "body": "null",
       "headers": {
-        "Date": "Wed, 27 Mar 2019 18:50:37 GMT",
+        "Date": "Thu, 04 Apr 2019 15:19:42 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -33,13 +33,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_get_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=6"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_get_cohort_members&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=5"
     },
     "response": {
       "binary": false,
-      "body": "[{\"cohortid\":6,\"userids\":[]}]",
+      "body": "[{\"cohortid\":5,\"userids\":[]}]",
       "headers": {
-        "Date": "Wed, 27 Mar 2019 18:50:37 GMT",
+        "Date": "Thu, 04 Apr 2019 15:19:42 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -60,13 +60,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_delete_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&userids[0]=67"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_user_delete_users&wstoken=c9bca4c37ef440ee63f69931274ec9a9&userids[0]=99"
     },
     "response": {
       "binary": false,
       "body": "null",
       "headers": {
-        "Date": "Wed, 27 Mar 2019 18:50:37 GMT",
+        "Date": "Thu, 04 Apr 2019 15:19:42 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
@@ -87,13 +87,13 @@
       "method": "get",
       "options": [],
       "request_body": "",
-      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_delete_cohorts&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=6"
+      "url": "http://localhost:8080/webservice/rest/server.php?moodlewsrestformat=json&wsfunction=core_cohort_delete_cohorts&wstoken=c9bca4c37ef440ee63f69931274ec9a9&cohortids[0]=5"
     },
     "response": {
       "binary": false,
       "body": "null",
       "headers": {
-        "Date": "Wed, 27 Mar 2019 18:50:37 GMT",
+        "Date": "Thu, 04 Apr 2019 15:19:42 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",

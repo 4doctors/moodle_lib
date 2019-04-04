@@ -18,13 +18,16 @@ defmodule MoodleLib.Client.Common do
     |> to_string()
   end
 
-  defp query_params(user) do
+  def query_params(user) do
     user
     |> Map.put(:wstoken, Application.get_env(:moodle_lib, :token))
     |> Map.put(:moodlewsrestformat, :json)
     |> Map.to_list()
-    |> Enum.map(fn {k, v} -> "#{k}=#{v}" end)
+    |> Enum.map(fn {k, v} -> "#{k}=#{encode_value(v)}" end)
     |> Enum.join("&")
-    |> URI.encode()
+  end
+
+  defp encode_value(value) do
+    value |> to_string() |> URI.encode_www_form()
   end
 end
