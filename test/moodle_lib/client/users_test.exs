@@ -13,7 +13,7 @@ defmodule MoodleLib.Client.UsersTest do
     username: "j.doe",
     firstname: "Sir John",
     lastname: "Doe",
-    email: "j.doe@example.com",
+    email: "j.doe+something@example.com",
     one: "extra",
     something: "else"
   }
