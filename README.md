@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/4doctors/moodle_lib.svg?style=svg&circle-token=19b5cb16193a29ba11104117e01c0a3df6bfe8e7)](https://circleci.com/gh/4doctors/moodle_lib)
 
-# Disclaimer: this library is in it's early stages and is not suitable for production!!!! Please don't use it yet.
+# Disclaimer: this library is in its early stages and is not suitable for production!!!! Please don't use it yet.
 
 # MoodleLib
 
