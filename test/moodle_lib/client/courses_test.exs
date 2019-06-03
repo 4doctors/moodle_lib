@@ -5,7 +5,7 @@ defmodule MoodleLib.Client.CoursesTest do
   alias MoodleLib.Client.Courses
 
   test "it can retrieve the list of all categories" do
-    # right now courses are preseeded on the DB: Test Course 1 ("testcourse1") belonging to category 1.1 and Test Course 2 (testcourse2) category 2
+    # right now 2 courses are preseeded on the Moodle DB: Test Course 1 ("testcourse1") belonging to category 1.1 and Test Course 2 (testcourse2) category 2
     use_cassette "get_courses", match_requests_on: [:query] do
       {:ok, courses} = Courses.get_courses()
 

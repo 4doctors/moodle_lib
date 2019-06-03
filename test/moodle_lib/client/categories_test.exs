@@ -5,7 +5,7 @@ defmodule MoodleLib.Client.CategoriesTest do
   alias MoodleLib.Client.Categories
 
   test "it can retrieve the list of all categories" do
-    # right now categories are preseeded on the DB: category 1, category 1.1 and category 2
+    # right now 3 categories are preseeded on the Moodle DB: category 1, category 1.1 and category 2
     use_cassette "get_categories", match_requests_on: [:query] do
       {:ok, categories} = Categories.get_categories()
 
