@@ -1,0 +1,29 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": [],
+      "method": "get",
+      "options": [],
+      "request_body": "",
+      "url": "http://localhost:8080/webservice/rest/server.php?courseid=3&moodlewsrestformat=json&wsfunction=core_course_get_contents&wstoken=c9bca4c37ef440ee63f69931274ec9a9"
+    },
+    "response": {
+      "binary": false,
+      "body": "[{\"id\":6,\"name\":\"General\",\"visible\":1,\"summary\":\"\",\"summaryformat\":1,\"section\":0,\"hiddenbynumsections\":0,\"uservisible\":true,\"modules\":[{\"id\":2,\"url\":\"http:\\/\\/localhost:8080\\/mod\\/forum\\/view.php?id=2\",\"name\":\"Announcements\",\"instance\":2,\"visible\":1,\"uservisible\":true,\"visibleoncoursepage\":1,\"modicon\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/forum\\/1551200783\\/icon\",\"modname\":\"forum\",\"modplural\":\"Forums\",\"availability\":null,\"indent\":0,\"onclick\":\"\",\"afterlink\":null,\"customdata\":\"\\\"\\\"\",\"completion\":0}]},{\"id\":7,\"name\":\"Topic 1\",\"visible\":1,\"summary\":\"\",\"summaryformat\":1,\"section\":1,\"hiddenbynumsections\":0,\"uservisible\":true,\"modules\":[]},{\"id\":8,\"name\":\"Topic 2\",\"visible\":1,\"summary\":\"\",\"summaryformat\":1,\"section\":2,\"hiddenbynumsections\":0,\"uservisible\":true,\"modules\":[]},{\"id\":9,\"name\":\"Topic 3\",\"visible\":1,\"summary\":\"\",\"summaryformat\":1,\"section\":3,\"hiddenbynumsections\":0,\"uservisible\":true,\"modules\":[]},{\"id\":10,\"name\":\"Topic 4\",\"visible\":1,\"summary\":\"\",\"summaryformat\":1,\"section\":4,\"hiddenbynumsections\":0,\"uservisible\":true,\"modules\":[]}]",
+      "headers": {
+        "Date": "Mon, 03 Jun 2019 16:00:52 GMT",
+        "Server": "Apache/2.4.29 (Ubuntu)",
+        "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
+        "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
+        "Pragma": "no-cache",
+        "Accept-Ranges": "none",
+        "Access-Control-Allow-Origin": "*",
+        "Content-Length": "1066",
+        "Content-Type": "application/json"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
