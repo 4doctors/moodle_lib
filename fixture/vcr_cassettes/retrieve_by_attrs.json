@@ -10,16 +10,16 @@
     },
     "response": {
       "binary": false,
-      "body": "[{\"id\":95,\"username\":\"j.doe\"}]",
+      "body": "[{\"id\":127,\"username\":\"j.doe\"}]",
       "headers": {
-        "Date": "Thu, 04 Apr 2019 15:19:39 GMT",
+        "Date": "Tue, 11 Jun 2019 09:28:37 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "30",
+        "Content-Length": "31",
         "Content-Type": "application/json"
       },
       "status_code": 200,
@@ -37,16 +37,16 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"users\":[{\"id\":95,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe+something@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
+      "body": "{\"users\":[{\"id\":127,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe+something@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
       "headers": {
-        "Date": "Thu, 04 Apr 2019 15:19:39 GMT",
+        "Date": "Tue, 11 Jun 2019 09:28:37 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "503",
+        "Content-Length": "504",
         "Content-Type": "application/json"
       },
       "status_code": 200,
@@ -64,16 +64,16 @@
     },
     "response": {
       "binary": false,
-      "body": "{\"users\":[{\"id\":95,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe+something@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
+      "body": "{\"users\":[{\"id\":127,\"username\":\"j.doe\",\"firstname\":\"Sir John\",\"lastname\":\"Doe\",\"fullname\":\"Sir John Doe\",\"email\":\"j.doe+something@example.com\",\"department\":\"\",\"firstaccess\":0,\"lastaccess\":0,\"auth\":\"manual\",\"suspended\":false,\"confirmed\":true,\"lang\":\"en\",\"theme\":\"\",\"timezone\":\"99\",\"mailformat\":1,\"profileimageurlsmall\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f2\",\"profileimageurl\":\"http:\\/\\/localhost:8080\\/theme\\/image.php\\/boost\\/core\\/1551200783\\/u\\/f1\"}],\"warnings\":[]}",
       "headers": {
-        "Date": "Thu, 04 Apr 2019 15:19:40 GMT",
+        "Date": "Tue, 11 Jun 2019 09:28:37 GMT",
         "Server": "Apache/2.4.29 (Ubuntu)",
         "Cache-Control": "private, must-revalidate, pre-check=0, post-check=0, max-age=0",
         "Expires": "Thu, 01 Jan 1970 00:00:00 GMT",
         "Pragma": "no-cache",
         "Accept-Ranges": "none",
         "Access-Control-Allow-Origin": "*",
-        "Content-Length": "503",
+        "Content-Length": "504",
         "Content-Type": "application/json"
       },
       "status_code": 200,
