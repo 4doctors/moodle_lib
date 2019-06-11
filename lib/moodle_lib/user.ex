@@ -13,6 +13,7 @@ defmodule MoodleLib.User do
             timezone: nil,
             mailformat: nil,
             description: nil,
+            institution: nil,
             city: nil,
             country: nil,
             firstnamephonetic: nil,

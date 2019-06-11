@@ -43,6 +43,24 @@ defmodule MoodleLib.Client.UsersTest do
     assert new_user.customfields.something == params.something
   end
 
+  test "institution and city are not customfields" do
+    params = %{
+      firstname: "John",
+      lastname: "Doe",
+      email: "j.doe@example.com",
+      institution: "Some institution",
+      city: "Some city",
+      something: "else"
+    }
+
+    new_user = Users.build_user(params)
+
+    assert Map.fetch(new_user.customfields, :institution) == :error
+    assert Map.fetch(new_user.customfields, :city) == :error
+    assert {:ok, _} = Map.fetch(new_user, :institution)
+    assert {:ok, _} = Map.fetch(new_user, :city)
+  end
+
   test "it can retrieve a user by email or username" do
     use_cassette "retrieve_by_attrs", match_requests_on: [:query] do
       user_params = @default_params
