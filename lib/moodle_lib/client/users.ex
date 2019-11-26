@@ -24,6 +24,16 @@ defmodule MoodleLib.Client.Users do
     |> (&struct(User, &1)).()
   end
 
+  def enroll_user_to_course(user_id, course_id) do
+    %{
+      "enrolments[0][roleid]" => 5,
+      "enrolments[0][userid]" => user_id,
+      "enrolments[0][courseid]" => course_id
+    }
+    |> process_request(:enrol_manual_enrol_users)
+    |> handle_user_enrolled
+  end
+
   def get_user(id) when is_integer(id) do
     %{
       "criteria[0][key]" => "id",
@@ -97,6 +107,13 @@ defmodule MoodleLib.Client.Users do
 
       _ ->
         {:error, message: "Error deleting the username"}
+    end
+  end
+
+  defp handle_user_enrolled(response_body) do
+    case response_body do
+      nil -> :ok
+      _ -> {:error, message: "Error enrolling the user"}
     end
   end
 
