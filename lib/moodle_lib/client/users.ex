@@ -24,12 +24,8 @@ defmodule MoodleLib.Client.Users do
     |> (&struct(User, &1)).()
   end
 
-  def enroll_user_to_course(user_id, course_id) do
-    %{
-      "enrolments[0][roleid]" => 5,
-      "enrolments[0][userid]" => user_id,
-      "enrolments[0][courseid]" => course_id
-    }
+  def enroll_user_to_course(user_id, course_id, suspended \\ false) do
+    build_user_enrollment(user_id, course_id, suspended: suspended)
     |> process_request(:enrol_manual_enrol_users)
     |> handle_user_enrolled
   end
@@ -74,6 +70,21 @@ defmodule MoodleLib.Client.Users do
     |> handle_got_users()
   end
 
+  def suspend_user_enrollment_to_course(user_id, course_id) do
+    build_user_enrollment(user_id, course_id, suspended: true)
+    |> process_request(:enrol_manual_enrol_users)
+    |> handle_user_enrollment_suspended
+  end
+
+  defp build_user_enrollment(user_id, course_id, suspended: value) do
+    %{
+      "enrolments[0][roleid]" => 5,
+      "enrolments[0][userid]" => user_id,
+      "enrolments[0][courseid]" => course_id,
+      "enrolments[0][suspend]" => if(value, do: 1, else: 0)
+    }
+  end
+
   defp prepare_user(user) do
     user
     |> Map.from_struct()
@@ -97,6 +108,13 @@ defmodule MoodleLib.Client.Users do
 
       _ ->
         {:error, message: "Error creating the username"}
+    end
+  end
+
+  defp handle_user_enrollment_suspended(response_body) do
+    case response_body do
+      nil -> :ok
+      _ -> {:error, message: "Error suspending enrollment"}
     end
   end
 

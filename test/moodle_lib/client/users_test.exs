@@ -113,6 +113,23 @@ defmodule MoodleLib.Client.UsersTest do
     end
   end
 
+  test "it can suspend an enrollment of a user to a course" do
+    # Test Course 1 (id: 3, "testcourse1")
+    # admin user is user_id: 2
+    use_cassette "suspend enroll successfully" do
+      assert :ok = Users.suspend_user_enrollment_to_course(2, 3)
+    end
+  end
+
+  test "it returns {:error, resason} if there are any problems suspending the enrollement" do
+    # Test Course 1 (id: 3, "testcourse1")
+    # admin user is user_id: 2
+    use_cassette "suspend enrollment failure" do
+      assert {:error, _} = Users.suspend_user_enrollment_to_course(0, 3)
+      assert {:error, _} = Users.suspend_user_enrollment_to_course(2, 0)
+    end
+  end
+
   test "it can retrieve multiple users given their ids" do
     use_cassette "multiple_users", match_requests_on: [:query] do
       {:ok, user1} = Users.create_user(@default_params)
