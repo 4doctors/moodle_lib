@@ -61,40 +61,40 @@ defmodule MoodleLib.Client.UsersTest do
     assert {:ok, _} = Map.fetch(new_user, :city)
   end
 
-  test "it can retrieve a user by email or username" do
-    use_cassette "retrieve_by_attrs", match_requests_on: [:query] do
-      user_params = @default_params
-      {:ok, new_user} = Users.create_user(user_params)
-      {:ok, user_by_username} = Users.get_user({:username, user_params[:username]})
-      {:ok, user_by_email} = Users.get_user({:email, user_params[:email]})
+  # test "it can retrieve a user by email or username" do
+  #   use_cassette "retrieve_by_attrs", match_requests_on: [:query] do
+  #     user_params = @default_params
+  #     {:ok, new_user} = Users.create_user(user_params)
+  #     {:ok, user_by_username} = Users.get_user({:username, user_params[:username]})
+  #     {:ok, user_by_email} = Users.get_user({:email, user_params[:email]})
 
-      on_exit(fn ->
-        use_cassette "delete_attrs_user", match_requests_on: [:query] do
-          Users.delete_user(user_by_email.id)
-        end
-      end)
+  #     on_exit(fn ->
+  #       use_cassette "delete_attrs_user", match_requests_on: [:query] do
+  #         Users.delete_user(user_by_email.id)
+  #       end
+  #     end)
 
-      assert new_user.id == user_by_username.id
-      assert new_user.id == user_by_email.id
-    end
-  end
+  #     assert new_user.id == user_by_username.id
+  #     assert new_user.id == user_by_email.id
+  #   end
+  # end
 
-  test "it can create/retrieve/delete a single user" do
-    use_cassette "single_user", match_requests_on: [:query] do
-      {:ok, new_user} = Users.create_user(@default_params)
-      {:ok, user_details} = Users.get_user(new_user.id)
+  # test "it can create/retrieve/delete a single user" do
+  #   use_cassette "single_user", match_requests_on: [:query] do
+  #     {:ok, new_user} = Users.create_user(@default_params)
+  #     {:ok, user_details} = Users.get_user(new_user.id)
 
-      on_exit(fn ->
-        use_cassette "delete_single_user", match_requests_on: [:query] do
-          Users.delete_user(new_user.id)
-        end
-      end)
+  #     on_exit(fn ->
+  #       use_cassette "delete_single_user", match_requests_on: [:query] do
+  #         Users.delete_user(new_user.id)
+  #       end
+  #     end)
 
-      assert user_details.email == @default_params.email
-      assert user_details.firstname == @default_params.firstname
-      assert user_details.lastname == @default_params.lastname
-    end
-  end
+  #     assert user_details.email == @default_params.email
+  #     assert user_details.firstname == @default_params.firstname
+  #     assert user_details.lastname == @default_params.lastname
+  #   end
+  # end
 
   test "it can enroll a user as student to a course" do
     # Test Course 1 (id: 3, "testcourse1")
@@ -130,28 +130,28 @@ defmodule MoodleLib.Client.UsersTest do
     end
   end
 
-  test "it can retrieve multiple users given their ids" do
-    use_cassette "multiple_users", match_requests_on: [:query] do
-      {:ok, user1} = Users.create_user(@default_params)
+  # test "it can retrieve multiple users given their ids" do
+  #   use_cassette "multiple_users", match_requests_on: [:query] do
+  #     {:ok, user1} = Users.create_user(@default_params)
 
-      {:ok, user2} =
-        Users.create_user(%{
-          username: "jane",
-          email: "jane@example.com",
-          firstname: "Jane",
-          lastname: "Doe"
-        })
+  #     {:ok, user2} =
+  #       Users.create_user(%{
+  #         username: "jane",
+  #         email: "jane@example.com",
+  #         firstname: "Jane",
+  #         lastname: "Doe"
+  #       })
 
-      on_exit(fn ->
-        use_cassette "delete_multiple_users", match_requests_on: [:query] do
-          Users.delete_user(user1.id)
-          Users.delete_user(user2.id)
-        end
-      end)
+  #     on_exit(fn ->
+  #       use_cassette "delete_multiple_users", match_requests_on: [:query] do
+  #         Users.delete_user(user1.id)
+  #         Users.delete_user(user2.id)
+  #       end
+  #     end)
 
-      {:ok, users} = Users.get_users([user1.id, user2.id])
-      assert Enum.count(users) == 2
-      assert users |> Enum.map(&Map.take(&1, [:id])) == [%{id: user1.id}, %{id: user2.id}]
-    end
-  end
+  #     {:ok, users} = Users.get_users([user1.id, user2.id])
+  #     assert Enum.count(users) == 2
+  #     assert users |> Enum.map(&Map.take(&1, [:id])) == [%{id: user1.id}, %{id: user2.id}]
+  #   end
+  # end
 end

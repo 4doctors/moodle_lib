@@ -23,33 +23,33 @@ defmodule MoodleLib.Client.CohortsTest do
     end
   end
 
-  test "it can manage cohort users" do
-    use_cassette "managing_cohort_users", match_requests_on: [:query] do
-      {:ok, user} =
-        Users.create_user(%{
-          username: "john",
-          email: "j.doe@example.com",
-          firstname: "John",
-          lastname: "Doe"
-        })
+  # test "it can manage cohort users" do
+  #   use_cassette "managing_cohort_users", match_requests_on: [:query] do
+  #     {:ok, user} =
+  #       Users.create_user(%{
+  #         username: "john",
+  #         email: "j.doe@example.com",
+  #         firstname: "John",
+  #         lastname: "Doe"
+  #       })
 
-      {:ok, cohort} = Cohorts.create_cohort(@default_params)
+  #     {:ok, cohort} = Cohorts.create_cohort(@default_params)
 
-      {:ok, users} = Cohorts.add_user_to_cohort(cohort, user)
-      assert Enum.member?(users, user.id)
+  #     {:ok, users} = Cohorts.add_user_to_cohort(cohort, user)
+  #     assert Enum.member?(users, user.id)
 
-      # we need to use on_exit because it runs on a separate process
-      # so we can record the same call with the right results
-      # remove_user_from_cohort calls get_cohort_members under the hood
-      on_exit(fn ->
-        use_cassette "managing_cohort_users-cleanup", match_requests_on: [:query] do
-          {:ok, users} = Cohorts.remove_user_from_cohort(cohort, user)
-          refute Enum.member?(users, user.id)
+  #     # we need to use on_exit because it runs on a separate process
+  #     # so we can record the same call with the right results
+  #     # remove_user_from_cohort calls get_cohort_members under the hood
+  #     on_exit(fn ->
+  #       use_cassette "managing_cohort_users-cleanup", match_requests_on: [:query] do
+  #         {:ok, users} = Cohorts.remove_user_from_cohort(cohort, user)
+  #         refute Enum.member?(users, user.id)
 
-          {:ok, _} = Users.delete_user(user.id)
-          {:ok, _} = Cohorts.delete_cohort(cohort.id)
-        end
-      end)
-    end
-  end
+  #         {:ok, _} = Users.delete_user(user.id)
+  #         {:ok, _} = Cohorts.delete_cohort(cohort.id)
+  #       end
+  #     end)
+  #   end
+  # end
 end
