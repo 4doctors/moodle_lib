@@ -1,14 +1,13 @@
 defmodule MoodleLib.Client.Users do
   alias MoodleLib.User
-
   import MoodleLib.Client.Common, only: [process_request: 2]
 
   def create_user(user_params) do
-    user_params
+   user_params
     |> build_user()
     |> prepare_user()
     |> to_querystring()
-    |> process_request(:core_user_create_users)
+    |> process_request(:local_criteria_ws_create_users_iomad)
     |> handle_user_created()
   end
 
@@ -171,7 +170,6 @@ defmodule MoodleLib.Client.Users do
     user_keys = Map.keys(%User{})
     params_keys = Map.keys(params)
     new_params = params_keys |> Enum.filter(&(!Enum.member?(user_keys, &1)))
-
     customfields =
       new_params
       |> Enum.reduce(%{}, fn el, acc ->
