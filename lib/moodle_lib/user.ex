@@ -17,6 +17,7 @@ defmodule MoodleLib.User do
             city: nil,
             companyid: nil,
             departmentid: nil,
+            department: nil,
             country: nil,
             firstnamephonetic: nil,
             lastnamephonetic: nil,
