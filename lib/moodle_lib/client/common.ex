@@ -3,7 +3,7 @@ defmodule MoodleLib.Client.Common do
     params
     |> Map.put(:wsfunction, fn_name)
     |> build_uri()
-    |> HTTPoison.get!()
+    |> HTTPoison.get!([recv_timeout: 120_000])
     |> extract_body()
   end
 
